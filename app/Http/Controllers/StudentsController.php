@@ -12,6 +12,7 @@ class StudentsController extends Controller
       return view('students-list',compact('students_data'));
     }
 
+    // student view form
     public function students_form()
     {
        
