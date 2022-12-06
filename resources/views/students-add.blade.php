@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <title>Hello, world!</title>
+  <title>Students Module</title>
 
   
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -23,13 +23,15 @@
         width:800px;
         margin-left:200px;
       }
-      .
-
-      </style>
+      
+  
+  </style>
+    
 </head>
 
 <body>
 
+  
   @if ($errors->any())
   <div class="alert alert-danger">
     <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -41,6 +43,7 @@
   </div>
   @endif
 
+  
 
 
   <div class="div1">
@@ -75,90 +78,115 @@
       <label for="validationDefaultUsername">Mobile no</label>
       <div class="input-group">
         <input type="number" name="mobile" class="form-control" id="mobile" placeholder="Enter mobile no" value="{{old('mobile')}}">
-        @if ($errors->has('mobile'))
-     <span class="alert alert-danger" role="alert">
-       {{ $errors->first('mobile') }}
-     </span>
-     @endif
-      </div>
+       </div>
+      @if ($errors->has('mobile'))
+      <span class="alert alert-danger" role="alert">
+        {{ $errors->first('mobile') }}
+      </span>
+      @endif
     </div>
 
     <div class="form-group col-md-4">
-      <label for="inputState">Status</label>
+      <label for="validationDefaultUsername">Status</label>
       <select id="inputState" name="status" class="form-control">
-        <option selected>select Status</option>
-        <option value="Active">Active</option>
-     <option value="INActive">INActive</option>
-      </select>
+        <option >select Status</option>
+        <option value="Active"  {{ (old('status') == 'Active') ? 'selected' : '' }}>Active</option>
+     <option value="INActive" {{ (old('status') == 'INActive') ? 'selected' : '' }}>INActive</option>
+    </select>
+    @if ($errors->has('status'))
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $errors->first('status') }}</strong>
+    </span>
+  @endif
     </div>
 
-   
-
-    <div class="form-row">
-    <div class="col-md-10 mb-3">
+     <div class="form-row">
+    <div class="col-md-6 mb-3">
       <label for="validationDefault03">Address</label>
-      <textarea class="form-control" id="address" rows="3" name="address" value="{{old('address')}}" placeholder="Enter address"></textarea>
+      <textarea class="form-control" id="address" rows="3" name="address"  placeholder="Enter address">{{old('address')}}</textarea>
       @if ($errors->has('address'))
      <span class="alert alert-danger" role="alert">
        {{ $errors->first('address') }}
      </span>
      @endif
     </div>
-
-    <div class="col-md-8 mb-3">
-    <label>Gender</label>
-     <input type="radio" name="gender" value="male"> Male
-     <input type="radio" name="gender" value="female" checked> Female
-     @if ($errors->has('gender'))
-     <span class="alert alert-danger" role="alert">
-       {{ $errors->first('gender') }}
-     </span>
-     @endif
-   </div>
-    </div> 
-
     
-    <div class="col-md-10 mb-3">
+   
+    
+    <div class="form-check form-check-inline">
+     <label class="form-check-label" for="inlineRadio2">Gender</label>
+    </div>
+
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender" value="Male"  {{ (old('gender') == 'Male') ? 'checked' : '' }} >
+      <label class="form-check-label" for="inlineRadio1">Male</label>
+    </div>
+
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender" value="Female" {{ (old('gender') == 'Female') ? 'checked' : '' }} checked>
+      <label class="form-check-label" for="inlineRadio2">Female</label>
+    </div>
+    
+   
+     </div>
+
+     
+
+  @php
+  $old = old();
+  //dd('123456',$old);
+  @endphp
+    
+    <div class="form-row">
+    <div class="col-md-6 mb-3">
     <div class="col-md-4 mb-3">
       <div class="form-group">
-     <input class="form-check-input" type="checkbox" name="language[]" id="CakePHP" value="CakePHP" aria-label="...">
+     <input class="form-check-input" type="checkbox" name="language[]" id="CakePHP" value="CakePHP" aria-label="..."   {{ isset($old['language']) && !empty($old) && in_array('CakePHP', $old['language']) ? 'checked' : '' }} >
     <label class="form-check-label" for="inlineCheckbox1">CakePHP</label>
     </div>
     </div>
-
-    <div class="col-md-4 mb-3">
+     <div class="col-md-4 mb-3">
     <div class="form-group">
-   <input class="form-check-input" type="checkbox" name="language[]" id="Laravel" value="Laravel" aria-label="...">
-   <label class="form-check-label" for="inlineCheckbox1">Laravel</label>
+    <input class="form-check-input" type="checkbox" name="language[]" id="Laravel" value="Laravel" aria-label="..."  {{ isset($old['language']) && !empty($old) && in_array('Laravel', $old['language']) ? 'checked' : '' }} >
+    <label class="form-check-label" for="inlineCheckbox1">Laravel</label>
     </div>
     </div>
 
     <div class="col-md-4 mb-3">
-   <input class="form-check-input" type="checkbox" name="language[]" id="Codeignatior" value="Codeignatior" aria-label="...">
+   <input class="form-check-input" type="checkbox" name="language[]" id="Codeignatior" value="Codeignatior" aria-label="..."  {{ isset($old['language']) && !empty($old) && in_array('Codeignatior', $old['language']) ? 'checked' : '' }}>
    <label class="form-check-label" for="inlineCheckbox1">Codeignatior</label>
     </div>
    </div>
-  
 
 
-    <div class="col-md-3 mb-3">
-      <label for="validationDefault05">Image</label>
-     <input type="file" name="image" class="form-control-file" id="image">
-    </div>
+   <div class="col-md-6 mb-3" class="form-check form-check-inline">
+    <label for="formFile" class="form-label">Default file input example</label>
+    <input class="form-control" name="image" type="file" id="formFile">
   </div>
-
+  
+ </div>
+  </div>
 
   <div class="form-group">
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
       <label class="form-check-label" for="invalidCheck2">
         Agree to terms and conditions
       </label>
     </div>
   </div>
   <button class="btn btn-primary" type="submit">Submit form</button>
+
+  <a href="{{ url('/index') }}" class="btn btn-primary" type="submit">Back</a>
 </form>
 </div>
+
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+
 <script type="text/javascript">
 $(document).ready(function() {
      $('select').language();

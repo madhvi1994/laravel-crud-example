@@ -14,11 +14,11 @@ use App\Http\Controllers\StudentsController;
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-});*/
+});
 
-Route::get('/', [StudentsController::class, 'index']);
+Route::get('/index', [StudentsController::class, 'index']);
 
 Route::get('/form', [StudentsController::class, 'students_form']);
 
@@ -29,3 +29,5 @@ Route::get('/edit/{id}', [StudentsController::class, 'edit']);
 Route::post('/update/{id}', [StudentsController::class, 'update']);
 
 Route::get('/delete/{id}', [StudentsController::class, 'destroy']);
+
+
